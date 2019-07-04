@@ -44,6 +44,7 @@ class Ball(pg.Surface):
     velocidad = 5
     dirx = 1
     diry = 1
+    cuentatoques = 0
 
     def __init__(self):
         pg.Surface.__init__(self, (self.w, self.h))
@@ -69,6 +70,8 @@ class Ball(pg.Surface):
         self.x = 392
         self.y = 292
         self.diry = random.choice([-1,1])
+        self.cuentatoques = 0
+        self.velocidad = 5
 
         if ganador == 1:
             self.dirx = -1
@@ -103,6 +106,24 @@ class Ball(pg.Surface):
             self.x += self.dirx
 
             self.sound.play()
+
+            self.cuentatoques += 1
+
+            '''
+            if self.cuentatoques <= 4:
+                self.velocidad = 5
+            elif self.cuentatoques <=9:
+                self.velocidad = 8
+            else:
+                self.velocidad = 14
+            '''
+
+            #if self.velocidad <= 14:
+            #    self.velocidad += 0.5
+
+            self.velocidad = min(14, self.velocidad + 0,5)  #es lo mismo que la expresión del if de arriba
+
+            
 
 
 class Game:
